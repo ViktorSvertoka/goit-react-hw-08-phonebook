@@ -1,0 +1,7 @@
+@import-normalize; /* bring in normalize.css styles */
+
+body {
+  background: url(../public/wallpaper.jpg) center / cover no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
