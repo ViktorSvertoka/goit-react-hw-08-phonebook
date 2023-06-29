@@ -1,21 +1,22 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectVisibleContacts } from 'redux/contacts/selectors';
+import { useDispatch } from 'react-redux';
+import { deleteContacts } from 'redux/contacts/operations';
 import { List, Item, Button } from './ContactList.styled';
-import { ReactComponent as DeleteIcon } from '../icons/delete.svg';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectVisibleContacts } from 'redux/selectors';
-import { deleteContacts } from '../../redux/operations';
+import { ReactComponent as DeleteIcon } from 'icons/delete.svg';
 
-// Компонент списку контактів
-const ContactList = () => {
+// Компонент ContactList відповідає за відображення списку контактів
+export const ContactList = () => {
   const contacts = useSelector(selectVisibleContacts);
   const dispatch = useDispatch();
+
   return (
     <List>
       {contacts.map(contact => (
         <Item key={contact.id}>
           {contact.name + ' : ' + contact.number}
           {
-            // Кнопка видалення контакту
             <Button
               type="button"
               name="delete"
@@ -30,5 +31,3 @@ const ContactList = () => {
     </List>
   );
 };
-
-export default ContactList;

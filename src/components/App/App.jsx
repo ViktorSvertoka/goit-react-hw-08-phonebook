@@ -1,40 +1,58 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import { fetchContacts } from '../../redux/operations';
-import { Container, Title, SubTitle, Wrapper } from './App.styled';
-import ContactForm from '../ContactForm/ContactForm';
-import ContactList from '../ContactList/ContactList';
-import Filter from '../Filter/Filter';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from '../Layout/Layout';
+import { PrivateRoute } from '../PrivateRoute';
+import { RestrictedRoute } from '../RestrictedRoute';
+import { refreshUser } from 'redux/auth/operations';
+import { useAuth } from '../../hooks/useAuth';
+import Home from 'pages/Home';
+import Register from 'pages/Register';
+import Login from 'pages/Login';
+import Contacts from 'pages/Contacts';
 
-const App = () => {
-  // Використання селектора selectContacts для отримання списку контактів з Redux-сховища
-  const contacts = useSelector(selectContacts);
-  const dispatch = useDispatch();
+export const App = () => {
+  const dispatch = useDispatch(); // Отримуємо функцію dispatch для відправки дій до Redux store
+  const { isRefreshing } = useAuth(); // Отримуємо стан аутентифікації користувача
 
   useEffect(() => {
-    // Запуск асинхронної Thunk-дії fetchContacts при монтуванні компонента
-    dispatch(fetchContacts());
+    dispatch(refreshUser()); // Викликаємо функцію оновлення користувача при монтажі компонента або зміні dispatch
   }, [dispatch]);
 
-  return (
-    <Container>
-      <Title>Phonebook</Title>
-      <ContactForm />
-      <SubTitle>Contacts</SubTitle>
-      {contacts.length > 0 ? (
-        // Якщо є контакти, показується компонент фільтрації
-        <Filter />
-      ) : (
-        // Якщо немає контактів, виводиться повідомлення про відсутність контактів
-        <Wrapper>Your phonebook is empty. Add first contact!</Wrapper>
-      )}
-      {contacts.length > 0 && (
-        // Якщо є контакти, показується компонент списку контактів
-        <ContactList />
-      )}
-    </Container>
+  // Перевіряємо, чи триває процес оновлення користувача
+  // Якщо так, відображаємо текст "Refreshing user..."
+  // Якщо ні, відображаємо структуру маршрутизації додатка
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/*Головна сторінка */}
+        <Route index element={<Home />} />
+        {/* Сторінка реєстрації користувача */}
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/login" component={<Register />} />
+          }
+        />
+        {/* Сторінка входу користувача */}
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+          }
+        />
+        {/* Сторінка контактів (доступна тільки для авторизованих користувачів) */}
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<Contacts />} />
+          }
+        />
+      </Route>
+      {/* Маршрут за замовчуванням (якщо ні один інший маршрут не співпадає) */}
+      <Route path="*" element={<Home />} />
+    </Routes>
   );
 };
-
-export default App;
