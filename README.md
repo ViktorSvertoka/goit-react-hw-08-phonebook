@@ -1,5 +1,3 @@
-**Читати іншими мовами: [Русский](README.md), [Українська](README.ua.md).**
-
 Використовуй цей
 [шаблон React-проекту](https://github.com/goitacademy/react-homework-template#readme)
 як стартову точку своєї програми.
