@@ -7,6 +7,10 @@ import { RestrictedRoute } from '../RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from '../../hooks/useAuth';
 
+import PhoneIcons from '../PhoneIcons/PhoneIcons';
+
+import { Wrapper } from './App.styled';
+
 const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
 const Login = lazy(() => import('pages/Login'));
@@ -26,34 +30,37 @@ export const App = () => {
   return isRefreshing ? (
     <p>Оновлення користувача...</p>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        {/*Головна сторінка */}
-        <Route index element={<Home />} />
-        {/* Сторінка реєстрації користувача */}
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute redirectTo="/login" component={<Register />} />
-          }
-        />
-        {/* Сторінка входу користувача */}
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<Login />} />
-          }
-        />
-        {/* Сторінка контактів (доступна тільки для авторизованих користувачів) */}
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<Contacts />} />
-          }
-        />
-      </Route>
-      {/* Маршрут за замовчуванням (якщо ні один інший маршрут не співпадає) */}
-      <Route path="*" element={<Home />} />
-    </Routes>
+    <Wrapper>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/*Головна сторінка */}
+          <Route index element={<Home />} />
+          {/* Сторінка реєстрації користувача */}
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute redirectTo="/login" component={<Register />} />
+            }
+          />
+          {/* Сторінка входу користувача */}
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            }
+          />
+          {/* Сторінка контактів (доступна тільки для авторизованих користувачів) */}
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            }
+          />
+        </Route>
+        {/* Маршрут за замовчуванням (якщо ні один інший маршрут не співпадає) */}
+        <Route path="*" element={<Home />} />
+      </Routes>
+      <PhoneIcons />
+    </Wrapper>
   );
 };
