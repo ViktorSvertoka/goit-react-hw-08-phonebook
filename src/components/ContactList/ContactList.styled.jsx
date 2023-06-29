@@ -9,7 +9,7 @@ export const List = styled.ul`
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.6);
   border: 3px solid #f08080;
-  list-style: none;
+  margin: 0 auto;
 `;
 
 export const Item = styled.li`
@@ -32,4 +32,8 @@ export const Button = styled.button`
   border: 3px solid #f08080;
   display: flex;
   align-items: center;
+
+  &:hover {
+    background-color: #b9bcd3;
+  }
 `;
