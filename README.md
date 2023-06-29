@@ -90,4 +90,4 @@ npm i axios
 
 URL
 
-https://649496f90da866a9536803ee.mockapi.io
+https://connections-api.herokuapp.com/
