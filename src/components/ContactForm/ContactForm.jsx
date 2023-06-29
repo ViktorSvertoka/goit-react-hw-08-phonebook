@@ -29,7 +29,8 @@ export const ContactForm = () => {
 
     // Перевіряє, чи існує контакт із таким самим ім'ям у списку контактів. Якщо контакт вже існує, виводиться попередження.
     if (isInContacts) {
-      alert(`${name} is already in contacts`);
+      alert(`${name} вже в контактах☝️`);
+
       return;
     }
 
