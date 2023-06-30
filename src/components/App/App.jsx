@@ -6,9 +6,7 @@ import { PrivateRoute } from '../PrivateRoute';
 import { RestrictedRoute } from '../RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from '../../hooks/useAuth';
-
 import PhoneIcons from '../PhoneIcons/PhoneIcons';
-
 import { Wrapper } from './App.styled';
 
 const Home = lazy(() => import('pages/Home'));
