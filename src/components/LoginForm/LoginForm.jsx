@@ -27,13 +27,20 @@ export const LoginForm = () => {
         <Input
           type="email"
           name="email"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          title="Будь ласка, введіть дійсну адресу електронної пошти"
+          required
         />
       </Label>
       <Label>
         Password
-        <Input type="password" name="password" />
+        <Input
+          type="password"
+          name="password"
+          pattern="^[a-zA-Z0-9!@#$%^&*()-_=+`~[\]{}|:<>/?]+$"
+          title="Пароль повинен містити тільки латинські літери (як великі, так і малі), цифри та інші символи"
+          required
+        />
       </Label>
       <Button type="submit">Log In</Button>
     </Form>

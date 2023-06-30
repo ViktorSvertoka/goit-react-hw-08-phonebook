@@ -28,17 +28,30 @@ export const RegisterForm = () => {
         <Input
           type="text"
           name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          pattern="^[^\d]+$"
+          title="Ім'я має містити лише літери, апострофи, дефіси та відступи"
+          required
         />
       </Label>
       <Label>
         Email
-        <Input type="email" name="email" />
+        <Input
+          type="email"
+          name="email"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          title="Будь ласка, введіть дійсну адресу електронної пошти"
+          required
+        />
       </Label>
       <Label>
         Password
-        <Input type="password" name="password" />
+        <Input
+          type="password"
+          name="password"
+          pattern="^[a-zA-Z0-9!@#$%^&*()-_=+`~[\]{}|:<>/?]+$"
+          title="Пароль повинен містити тільки латинські літери (як великі, так і малі), цифри та інші символи"
+          required
+        />
       </Label>
       <Button type="submit">Register</Button>
     </Form>
