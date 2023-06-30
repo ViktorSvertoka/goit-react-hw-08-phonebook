@@ -10,14 +10,6 @@ export const RegisterForm = () => {
     event.preventDefault();
     const form = event.currentTarget;
 
-    // if (
-    //   form.elements.name.value.trim() === '' ||
-    //   form.elements.email.value.trim() === '' ||
-    //   form.elements.password.value.trim() === ''
-    // ) {
-    //   return alert('Будь ласка, заповніть усі поля!');
-    // }
-
     // Викликаємо дію register з параметрами name, email та password, які отримуємо зі значень полів форми
     dispatch(
       register({
