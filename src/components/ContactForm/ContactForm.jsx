@@ -66,8 +66,8 @@ export const ContactForm = () => {
             name="name"
             value={name}
             onChange={handleChange}
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            pattern="^[^\d]+$"
+            title="Ім'я має містити лише літери, апострофи, дефіси та відступи"
             required
           />
         </Label>
@@ -79,8 +79,10 @@ export const ContactForm = () => {
             name="number"
             value={number}
             onChange={handleChange}
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            pattern="\+\d{12}"
+            minlength="13"
+            maxlength="13"
+            title="Номер телефону має починатися з +, а потім 12 цифр"
             required
           />
         </Label>
