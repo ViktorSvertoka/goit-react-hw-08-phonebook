@@ -64,6 +64,7 @@ export const ContactForm = () => {
           <Input
             type="text"
             name="name"
+            placeholder="Введіть ім'я"
             value={name}
             onChange={handleChange}
             pattern="^[^\d]+$"
@@ -77,6 +78,7 @@ export const ContactForm = () => {
           <Input
             type="tel"
             name="number"
+            placeholder="Введіть номер телефону"
             value={number}
             onChange={handleChange}
             pattern="\+\d{12}"
